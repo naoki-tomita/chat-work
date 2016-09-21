@@ -1,0 +1,22 @@
+{
+  "name": "chat-work",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naoki-tomita/chat-work.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naoki-tomita/chat-work/issues"
+  },
+  "homepage": "https://github.com/naoki-tomita/chat-work#readme",
+  "devDependencies": {
+    "gulp-webserver": "^0.9.1"
+  }
+}

@@ -1,0 +1,62 @@
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<input type="text" data-bind="value: koName"></input><br>
+<input type="text" data-bind="value: koMessage"></input><br>
+<button data-bind="click: koSend">Send Message</button>
+<ul data-bind="foreach: koMessages">
+  <li><span data-bind="text: name"></span> says "<span data-bind="text: message"></span>"</li>
+</ul>
+
+<script>
+( function( root ) {
+  var ko = root.ko,
+      $ = root.$,
+      baseUrl = "awsのapigatewayのURL",
+      vm;
+  vm = {
+    koMessages: ko.observable( [] ),
+    koName: ko.observable( "" ),
+    koMessage: ko.observable( "" ),
+    koSend: function() {
+      var that = this;
+      send( this.koName(), this.koMessage() )
+      .then( function() {
+        that.koName( "" );
+        that.koMessage( "" );
+      } );
+    }
+  };
+  function update() {
+    return $.ajax( {
+      type: "GET",
+      url: baseUrl + "/",
+      headers: {
+        "x-api-key": "apiキー"
+      }
+    } )
+    .then( function( response ) {
+      vm.koMessages( response );
+    } );
+  };
+  function send( name, message ) {
+    return $.ajax( {
+      type: "POST",
+      url: baseUrl + "/",
+      headers: {
+        "x-api-key": "apiキー",
+        "content-type": "application/json"
+      },
+      data: JSON.stringify( {
+        name: name,
+        message: message
+      } )
+    } )
+    .then( function( response ) {
+      update();
+    } );
+  };
+  update();
+  ko.applyBindings( vm );
+
+} )( window );
+</script>
