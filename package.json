@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/naoki-tomita/chat-work#readme",
   "devDependencies": {
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "websocket": "^1.0.23"
   }
 }

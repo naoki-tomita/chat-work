@@ -1,5 +1,6 @@
 var gulp = require( "gulp" ),
-    webserver = require( "gulp-webserver" );
+    webserver = require( "gulp-webserver" ),
+    ws = new require( "./server.js" ).websocket;
 
 gulp.task( "webserver", function() {
   gulp.src( "" )
@@ -9,4 +10,8 @@ gulp.task( "webserver", function() {
   } ) );
 } );
 
-gulp.task( "default", [ "webserver" ] )
+gulp.task( "wsserver", function() {
+  new ws();
+} );
+
+gulp.task( "default", [ "webserver", "wsserver" ] )
